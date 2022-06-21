@@ -24,3 +24,11 @@ body {
   line-height: 30px;
   margin-bottom: 30px;
 }
+
+.app-title{
+  margin-top:75px;
+  margin-bottom: 50px;
+  font-size: 76px;
+  color: #8dd7d5;
+  font-family:'fascinate';
+}

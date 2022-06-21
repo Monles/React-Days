@@ -4,6 +4,20 @@ import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component';
 import './App.css';
 
+const App = () => {
+  return (
+    <div className="App">
+      <h1 className="app-title">Monsters Role</h1>
+      {/* <SearchBox
+          className="monsters-search-box"
+          onSearchHandler={onSearchChange}
+          placeholder="search monsters"
+        /> */}
+      <CardList monsters={fileteredMonsters} />
+    </div>
+  );
+};
+
 class App extends Component {
   constructor() {
     super();
