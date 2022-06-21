@@ -1,5 +1,8 @@
-import { Component } from "react";
-import "./App.css";
+import { Component } from 'react';
+
+import CardList from './components/card-list/card-list.component';
+import SearchBox from './components/search-box/search-box.component';
+import './App.css';
 
 class App extends Component {
   constructor() {
@@ -7,59 +10,44 @@ class App extends Component {
 
     this.state = {
       monsters: [],
-      searchField: "",
+      searchField: '',
     };
-    console.log("constructor");
   }
 
   componentDidMount() {
-    console.log("componentDidMount");
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
       .then((users) =>
-        this.setState(
-          () => {
-            return { monsters: users };
-          },
-          () => {
-            console.log(this.state);
-          }
-        )
+        this.setState(() => {
+          return { monsters: users };
+        })
       );
   }
 
   onSearchChange = (event) => {
     const searchField = event.target.value.toLocaleLowerCase();
-
     this.setState(() => {
       return { searchField };
     });
   };
 
   render() {
-    console.log("render");
-
     const { monsters, searchField } = this.state;
     const { onSearchChange } = this;
+
     const fileteredMonsters = monsters.filter((monster) => {
       return monster.name.toLowerCase().includes(searchField);
     });
 
     return (
       <div className="App">
-        <input
-          className="search-box"
-          type="search"
-          placeholder="Search something"
-          onChange={onSearchChange}
+        <h1 className="app-title">Monsters Role</h1>
+        <SearchBox
+          className="monsters-search-box"
+          onSearchHandler={onSearchChange}
+          placeholder="search monsters"
         />
-        {fileteredMonsters.map((monster) => {
-          return (
-            <div key={monster.id}>
-              <h1>{monster.name}</h1>
-            </div>
-          );
-        })}
+        <CardList monsters={fileteredMonsters} />
       </div>
     );
   }
